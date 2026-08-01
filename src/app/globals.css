@@ -5,10 +5,16 @@
 @layer base {
   html,
   body {
-    height: 100%;
+    min-height: 100%;
     background: #ffffff;
     font-family: var(--font-oswald), 'Oswald', sans-serif;
     font-weight: 300;
+  }
+
+  /* Only a page that declares itself a fixed full-screen scene pins the
+     document. Anything else — a landing page that grows past the fold — is
+     left free to scroll. */
+  body:has([data-fullscreen]) {
     overflow: hidden;
     overscroll-behavior: none;
   }
