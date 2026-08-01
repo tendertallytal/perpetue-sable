@@ -314,7 +314,7 @@ export default function Home() {
                 ) : (
                   <p
                     key={message.id}
-                    className="animate-fade-in self-end whitespace-pre-wrap text-right text-sm font-light leading-snug text-chalk"
+                    className="animate-fade-in self-end whitespace-pre-wrap text-right text-sm font-light leading-snug text-black"
                   >
                     {message.content}
                   </p>
