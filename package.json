@@ -1,5 +1,5 @@
 {
-  "name": "ai-poet-chatbot",
+  "name": "perpetue",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "lucide-react": "^0.344.0",
     "next": "^14.1.0",
     "openai": "^4.28.0",
     "react": "^18.3.1",

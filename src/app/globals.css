@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    height: 100%;
+    background: #ffffff;
+    font-family: var(--font-oswald), 'Oswald', sans-serif;
+    font-weight: 300;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+}
+
+@layer utilities {
+  /* Thin magenta scrollbar for the dialog box */
+  .scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.magenta.DEFAULT') transparent;
+  }
+
+  .scroll-thin::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .scroll-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scroll-thin::-webkit-scrollbar-thumb {
+    background: theme('colors.magenta.DEFAULT');
+    opacity: 0.6;
+  }
+}
+
+/* The pocket watch keeps its own gif animation; this drifts it gently as it hangs. */
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-2.5deg);
+  }
+  50% {
+    transform: rotate(2.5deg);
+  }
+}
+
+.animate-sway {
+  transform-origin: top center;
+  animation: sway 3.2s ease-in-out infinite;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-sway,
+  .animate-fade-in {
+    animation: none;
+  }
+}

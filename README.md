@@ -1,64 +1,71 @@
-# 🤖 AI Chatbot Template
+# Perpétue Sablé
 
-Welcome to the AI Chatbot Template! This flexible, full-stack starter kit is designed for students of Halim Madi's course to build and deploy custom AI chatbots. While the included example focuses on poetry, the framework can support a wide range of use cases—from wellness bots and creative assistants to educational tutors and productivity companions.
+A browser-based conversation piece. Perpétue Sablé — called the Abnomaly, called
+Patient S — sits on the rocks at the edge of a pond, missing her brain, in a
+4 November 1953 that never ends. You type; she answers in the pink box above her.
 
----
+Clicking *"Click to know who you are"* replaces the white background with the
+viewer's own front-facing camera, so they appear inside the scene.
 
-## 🎯 What You'll Build
+The dialogue box has no fill — it is an outline you can drag anywhere on the
+scene, and the dashed line follows it back to Perpétue.
 
-A full-featured AI chatbot that can:
-- Engage in natural or themed conversations (e.g. poetic, informative, supportive)
-- Accept voice input via microphone
-- Respond with synthesized speech
-- Stream responses in real-time
-- Deploy seamlessly to production
+## Stack
 
----
+Next.js 14 (App Router) · React 18 · TypeScript · Tailwind CSS · Oswald Light.
+The chat completion runs server-side against an OpenAI-compatible LM Studio
+server, reached over a Cloudflare tunnel.
 
-## 🛠️ Technical Features
+## Setup
 
-- **Modern Stack**: Next.js 14, React 18, TypeScript
-- **Beautiful UI**: Tailwind CSS with responsive design
-- **AI Integration**: OpenAI API (GPT, Whisper, TTS)
-- **Security**: Server-side API handling for key protection
-- **Production-Ready**: Easy deployment to Vercel
-
----
-
-## 📚 Course Integration
-
-This template is ideal for students who want to:
-1. Learn AI integration in web applications
-2. Practice modern web development with React & Next.js
-3. Experiment with creative or practical chatbot use cases
-4. Build and launch polished, real-world applications
-
----
-
-## 🔍 Code Structure
-
-```
-src/
-├── app/
-│   ├── api/
-│   │   └── chat/
-│   │       └── route.ts     # Server-side API for OpenAI chat
-│   ├── page.tsx             # Main chat interface
-│   ├── layout.tsx           # App layout
-│   └── globals.css          # Global styles
+```bash
+npm install
 ```
 
+```bash
+npm run dev
+```
+
+Open http://localhost:3000. The camera feature needs `localhost` or HTTPS, and
+the browser will ask permission the first time.
+
+### The model
+
+`LLM_API_KEY` is required — the tunnel returns 401 without it. It lives in
+`.env.local`, which is gitignored and must never be committed.
+
+| Variable | Default | Notes |
+| --- | --- | --- |
+| `LLM_BASE_URL` | the tunnel URL, `/v1` suffixed | |
+| `LLM_MODEL` | `qwen/qwen3.6-35b-a3b` | |
+| `LLM_API_KEY` | none | **secret** — set in `.env.local` |
+
+Cloudflare quick tunnels get a new hostname each time they restart, so if
+replies stop arriving, check the current URL and update `LLM_BASE_URL`. To see
+what a server is serving:
+
+```bash
+curl -H "Authorization: Bearer $LLM_API_KEY" "$LLM_BASE_URL/models"
+```
+
+## Structure
+
+```
+public/assets/          # the collage: doll, rocks, lotus, willow, branch, pocket watch
+src/app/
+├── page.tsx            # the whole scene + dialogue
+├── line-art.tsx        # dotted magenta flowers filling the empty left side
+├── prompt.ts           # Perpétue's system prompt
+├── layout.tsx          # fonts + metadata
+├── globals.css         # base styles and the sway/fade animations
+└── api/chat/route.ts   # server-side chat completion
+```
+
+## Deployment
+
+Push to GitHub, connect the repo to Vercel, add `TOGETHER_API_KEY` as an
+environment variable, and deploy.
+
 ---
 
-## 🚀 Deployment
-- Push to GitHub
-- Connect to Vercel
-- Add environment variables in Vercel
-- Deploy and share your bot!
-
----
-
-## 📜 License
-MIT License – Feel free to use and adapt this template for your projects or experiments!
-
-Created with 💙 by Halim Madi (www.halimmadi.com) for students, builders, and creative technologists.
+Built from the AI Chatbot Template by Halim Madi (www.halimmadi.com). MIT License.
